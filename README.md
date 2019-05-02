@@ -1,2 +1,2 @@
 # laravel-smsto
-Laravel 5 package for SMS.to
+Laravel 5 package for sending sms in SMS.to

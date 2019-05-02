@@ -1,0 +1,35 @@
+{
+    "name": "intergo/laravel-smsto",
+    "description": "Laravel 5 package for sending sms in SMS.to",
+    "keywords": [
+        "laravel",
+        "sms",
+        "bulksms",
+        "marketing"
+    ],
+    "authors": [
+        {
+            "name": "Manny Isles",
+            "email": "manny@intergo.com.cy"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "guzzlehttp/guzzle": "6.3.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "Intergo\\SmsTo\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Intergo\\SmsTo\\ServiceProvider"
+            ],
+            "aliases": {
+                "SmsTo": "Intergo\\SmsTo\\Facades\\SmsToFacade"
+            }
+        }
+    }
+}
