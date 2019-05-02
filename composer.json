@@ -20,7 +20,10 @@
     "autoload": {
         "psr-0": {
             "Intergo\\SmsTo\\": "src/"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "extra": {
         "laravel": {
