@@ -6,5 +6,6 @@ return [
     'client_secret' => env('SMSTO_CLIENT_SECRET'),
     'username'=> env('SMSTO_EMAIL'),
     'password' => env('SMSTO_PASSWORD'),
-    'scope' => '*'
+    'scope' => '*',
+    'callback_url' => env('SMSTO_CALLBACK_URL'),
 ];

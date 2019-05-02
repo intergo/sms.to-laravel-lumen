@@ -12,10 +12,16 @@ class SmsTo {
     public $message;
     public $senderId;
     public $recipients;
+    public $callbackUrl;
 
     public function __construct()
     {
         $this->client = new Client;
+    }
+
+    public function auth()
+    {
+
     }
 
     public function send($request)
