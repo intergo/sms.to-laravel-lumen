@@ -44,4 +44,9 @@ class SmsTo {
     {
         $this->recipients = $recipients;
     }
+
+    public function setCallbackUrl($callbackUrl)
+    {
+        $this->callbackUrl = $callbackUrl;
+    }
 }
