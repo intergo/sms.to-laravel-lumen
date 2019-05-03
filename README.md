@@ -25,6 +25,21 @@ php artisan vendor:publish --provider="Intergo\SmsTo\ServiceProvider"
 You will get a config file named `smsto.php` in your config directory. Customize the defaults to your smsto configurations.
 
 
+```php
+<?php
+
+	return [
+	    'grant_type' => 'password',
+	    'client_id' => env('SMSTO_CLIENT_ID'),
+	    'client_secret' => env('SMSTO_CLIENT_SECRET'),
+	    'username'=> env('SMSTO_EMAIL'),
+	    'password' => env('SMSTO_PASSWORD'),
+	    'scope' => '*',
+	    'callback_url' => env('SMSTO_CALLBACK_URL'),
+	];
+```
+
+
 ## Usage
 
 Change or add configuration in you `.env` file
