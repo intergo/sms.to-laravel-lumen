@@ -13,25 +13,38 @@ use Carbon\Carbon;
 class SmsTo {
     
     protected $client;
+
     public $accessToken;
     public $message;
+
+    // Array of destination numbers with their respective personalized messages to be sent
     public $messages;
+
+    // The sender ID which is optional
     public $senderId;
+
     public $recipients;
+
     public $listId;
+
+    // This will be an optional URL where we will POST some information 
+    // about the status of SMS as soon as we have an update
     public $callbackUrl;
-    public $baseUrl = 'https://api.smsto.space/v1';
+
+    public $baseUrl;
 
     public function __construct()
     {
-        
+        $this->senderId = config('smsto.sender_id');
+        $this->callbackUrl = config('smsto.callback_url');
+        $this->baseUrl = 'https://api.smsto.space/v1';
     }
 
     public function getAccessToken()
     {
         $url = $this->baseUrl . '/oauth/token';
         
-        // Change all credenatials
+        // Change all credentials
         $this->credentials = [
             'grant_type' => 'password',
             'client_id' => config('smsto.client_id'),
@@ -72,25 +85,27 @@ class SmsTo {
             }
         }
 
-        $headers = [
-            'Content-Type' => 'application/json',
-        ];
+        $response = $this->request($url, 'post', $this->credentials);
 
-        $client = new Client(['headers' => $headers, 'verify' => false]);
+        if ($response) {
+            $date = Carbon::now()->addSeconds($response['expires_in']);
+            Storage::disk('local')->put('smsto/accessTokenExpiredOn', $date->toDateTimeString());
+            Storage::disk('local')->put('smsto/accessToken', $response['access_token']);
+
+            $this->accessToken = $response['access_token'];
+
+            return $this->accessToken;
+        }
+    }
+
+    public function getBalance()
+    {
+        $this->getAccessToken();
         
-        $response = $client->post($url, [
-                        'json' => $this->credentials,
-                    ])->getBody()->getContents();
-        $response = json_decode($response);
+        $path = $this->baseUrl . '/balance';
 
-        // We store the access token to storage with its expiration date and time
-        $date = Carbon::now()->addSeconds($response->expires_in);
-        Storage::disk('local')->put('smsto/accessTokenExpiredOn', $date->toDateTimeString());
-        Storage::disk('local')->put('smsto/accessToken', $response->access_token);
-
-        $this->accessToken = $response->access_token;
-
-        return $this->accessToken;
+        $body = [];
+        return $this->request($path, 'post', $body);
     }
 
     public function sendSingle()
@@ -176,6 +191,7 @@ class SmsTo {
     {
         $headers = [
             'Content-Type' => 'application/json',
+            'Accept' => 'application/json'
         ];
         $headers['Authorization'] = ' Bearer ' . $this->accessToken;
 
@@ -208,7 +224,7 @@ class SmsTo {
             $response = json_decode($response, true);
 
         } catch (Exception $e) {
-            
+            $response = $this->exception($e);
         } catch (RequestException $e) {
             $response = $this->exception($e);
         } catch (ClientException $e) {

@@ -10,7 +10,9 @@
     "authors": [
         {
             "name": "Manny Isles",
-            "email": "manny@intergo.com.cy"
+            "email": "manny@intergo.com.cy",
+            "homepage": "https://intergo.com.cy",
+            "role": "Developer"
         }
     ],
     "require": {

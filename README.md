@@ -1,7 +1,6 @@
 # laravel-smsto
 Laravel 5 package for sending sms in SMS.to
 
-
 ## Installation
 
 You need to be have an Sms.To account to use this package. If you do not have one, [get here](https://sms.to).
@@ -35,6 +34,7 @@ You will get a config file named `smsto.php` in your config directory. Customize
 	    'username'=> env('SMSTO_EMAIL'),
 	    'password' => env('SMSTO_PASSWORD'),
 	    'scope' => '*',
+      'sender_id' => env('SMSTO_SENDER_ID'),
 	    'callback_url' => env('SMSTO_CALLBACK_URL'),
 	];
 ```
@@ -45,10 +45,11 @@ You will get a config file named `smsto.php` in your config directory. Customize
 Change or add configuration in you `.env` file
 
 ```shell
-SMSTO_CLIENT_ID=xyxy
-SMSTO_CLIENT_SECRET=xyz
-SMSTO_EMAIL=email@example.com
+SMSTO_CLIENT_ID=xyxy1234
+SMSTO_CLIENT_SECRET=xyz1234567
+SMSTO_EMAIL=email@sms.to
 SMSTO_PASSWORD=y2kP@szword
+SMSTO_SENDER_ID=smsto
 SMSTO_CALLBACK_URL=https://mysite.org/smscallback
 ```
 
@@ -104,6 +105,11 @@ Create your route
     }
 ```
 
+You can also use the helper for sending SMS
+
+```php
+    smsto()->setMessages([['to' => '+63917*******', 'message' => 'test message']])->sendSingle()
+```
 
 ## License
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
