@@ -16,6 +16,7 @@ class SmsTo {
     public $messages;
     public $senderId;
     public $recipients;
+    public $listId;
     public $callbackUrl;
     public $baseUrl = 'https://api.smsto.space/v1';
 
@@ -24,7 +25,7 @@ class SmsTo {
         
     }
 
-    public function getToken()
+    public function getAccessToken()
     {
         $authUrl = $this->baseUrl . '/oauth/token';
         
@@ -50,6 +51,8 @@ class SmsTo {
         $response = json_decode($response);
 
         $this->accessToken = $response->access_token;
+
+        return $this->accessToken;
     }
 
     public function refreshToken()
@@ -81,7 +84,7 @@ class SmsTo {
 
     public function sendSingle()
     {
-        $this->getToken();
+        $this->getAccessToken();
         
         $path = $this->baseUrl . '/sms/single/send';
 
@@ -95,7 +98,7 @@ class SmsTo {
 
     public function sendMultiple()
     {
-        $this->getToken();
+        $this->getAccessToken();
         
         $path = $this->baseUrl . '/sms/send';
         
@@ -111,26 +114,37 @@ class SmsTo {
     public function setMessage($message)
     {
         $this->message = $message;
+        return $this;
     }
 
     public function setMessages($messages)
     {
         $this->messages = $messages;
+        return $this;
     }
 
     public function setSenderId($senderId)
     {
         $this->senderId = $senderId;
+        return $this;
     }
 
     public function setRecipients($recipients)
     {
         $this->recipients = $recipients;
+        return $this;
+    }
+
+    public function setListId($listId)
+    {
+        $this->listId = $listId;
+        return $this;
     }
 
     public function setCallbackUrl($callbackUrl)
     {
         $this->callbackUrl = $callbackUrl;
+        return $this;
     }
 
     public function request($path, $method, $data = [])

@@ -70,19 +70,17 @@ Create your route
     class SmsController extends Controller
     {
     	// Sending single SMS to one number
-        public function send(SmsTo $smsTo)
+        public function send(SmsTo $sms)
         {
-            $message = 'Hi Market!';
-            $recipients = '+63917********';
-            return $sms->setMessage($message)
-                       ->setRecipients($recipients)
+            $messages = [['to' => '+63917*******', 'message' => 'This is test']];
+            return $sms->setMessages($messages)
                        ->setSenderId('COLTD')
                        ->setCallbackUrl('https://mysite.org/smscallback')
-                       ->send();
+                       ->sendSingle();
         }
 
         // Sending single SMS to multiple numbers
-        public function broadcast(SmsTo $smsTo)
+        public function broadcast(SmsTo $sms)
         {
             $message = 'Hi Market!';
             $recipients = ['+63917********', '+63919********'];
@@ -90,7 +88,7 @@ Create your route
                        ->setRecipients($recipients)
                        ->setSenderId('COLTD')
                        ->setCallbackUrl('https://mysite.org/smscallback')
-                       ->send();
+                       ->sendMultiple();
         }
     }
 ```
