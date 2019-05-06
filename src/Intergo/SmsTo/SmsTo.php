@@ -12,34 +12,87 @@ use Carbon\Carbon;
 
 class SmsTo {
     
+    /**
+     * Guzzle Client.
+     *
+     * @var \GuzzleHttp\Client
+     */
     protected $client;
 
+    /**
+     * Access token.
+     *
+     * @var string
+     */
     public $accessToken;
+
+    /**
+     * The message that will going to send.
+     *
+     * @var string
+     */
     public $message;
 
-    // Array of destination numbers with their respective personalized messages to be sent
+    /**
+     * Array of destination numbers with their respective personalized messages to be sent
+     *
+     * @var array
+     */
     public $messages;
 
-    // The sender ID which is optional
+    /**
+     * The sender ID which is optional
+     *
+     * @var string
+     */
     public $senderId;
 
+    /**
+     * Array of phone numbers.
+     *
+     * @var array
+     */
     public $recipients;
 
+    /**
+     * List id.
+     *
+     * @var int
+     */
     public $listId;
 
-    // This will be an optional URL where we will POST some information 
-    // about the status of SMS as soon as we have an update
+    /**
+     * Callback URL
+     *
+     * This will be an optional URL where we will POST some information 
+     * about the status of SMS as soon as we have an update
+     *
+     * @var string
+     */
     public $callbackUrl;
 
+    /**
+     * Base URL
+     *
+     * Base URL to be use for calling API
+     * Example URL is https://api.sms.to/v1
+     *
+     * @var string
+     */
     public $baseUrl;
 
     public function __construct()
     {
         $this->senderId = config('smsto.sender_id');
         $this->callbackUrl = config('smsto.callback_url');
-        $this->baseUrl = 'https://api.smsto.space/v1';
+        $this->baseUrl = config('smsto.base_url');
     }
 
+    /**
+     * Get Access token.
+     *
+     * @return string
+     */
     public function getAccessToken()
     {
         $url = $this->baseUrl . '/oauth/token';
@@ -57,6 +110,11 @@ class SmsTo {
         return $this->token($url);
     }
 
+    /**
+     * Refresh Access token.
+     *
+     * @return string
+     */
     public function refreshToken()
     {
         $url = $this->baseUrl . '/oauth/token';
@@ -73,6 +131,11 @@ class SmsTo {
         return $this->token($url);
     }
 
+    /**
+     * Access token.
+     *
+     * @return string
+     */
     public function token($url)
     {
         // Check if we have accessToken saved already
@@ -98,6 +161,11 @@ class SmsTo {
         }
     }
 
+    /**
+     * Get user cash balance.
+     *
+     * @return array
+     */
     public function getBalance()
     {
         $this->getAccessToken();
@@ -105,6 +173,7 @@ class SmsTo {
         $path = $this->baseUrl . '/balance';
 
         $body = [];
+
         return $this->request($path, 'post', $body);
     }
 
@@ -151,36 +220,72 @@ class SmsTo {
         return $this->request($path, 'post', $body);
     }
 
+    /**
+     * Set the message.
+     *
+     * @param string $message 
+     * @return \Intergo\SmsTo\SmsTo
+     */
     public function setMessage($message)
     {
         $this->message = $message;
         return $this;
     }
 
+    /**
+     * Set the messages.
+     *
+     * @param array $messages 
+     * @return \Intergo\SmsTo\SmsTo
+     */
     public function setMessages($messages)
     {
         $this->messages = $messages;
         return $this;
     }
 
+    /**
+     * Set Sender ID.
+     *
+     * @param string $senderId 
+     * @return \Intergo\SmsTo\SmsTo
+     */
     public function setSenderId($senderId)
     {
         $this->senderId = $senderId;
         return $this;
     }
 
+    /**
+     * Set recipients.
+     *
+     * @param array $recipients 
+     * @return \Intergo\SmsTo\SmsTo
+     */
     public function setRecipients($recipients)
     {
         $this->recipients = $recipients;
         return $this;
     }
 
+    /**
+     * Set list id.
+     *
+     * @param int $listId 
+     * @return \Intergo\SmsTo\SmsTo
+     */
     public function setListId($listId)
     {
         $this->listId = $listId;
         return $this;
     }
 
+    /**
+     * Set callback URL.
+     *
+     * @param string $callbackUrl 
+     * @return \Intergo\SmsTo\SmsTo
+     */
     public function setCallbackUrl($callbackUrl)
     {
         $this->callbackUrl = $callbackUrl;
