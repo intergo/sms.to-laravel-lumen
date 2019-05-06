@@ -14,8 +14,10 @@
         }
     ],
     "require": {
-        "php": ">=7.0.0",
-        "guzzlehttp/guzzle": "6.3.0"
+        "php": ">=7.1.3",
+        "guzzlehttp/guzzle": "6.3.*",
+        "nesbot/carbon": "2.17.*",
+        "illuminate/filesystem": "^5.7"
     },
     "autoload": {
         "psr-0": {

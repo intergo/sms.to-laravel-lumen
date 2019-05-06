@@ -7,6 +7,8 @@ use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ServerException;
+use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class SmsTo {
     
@@ -27,7 +29,7 @@ class SmsTo {
 
     public function getAccessToken()
     {
-        $authUrl = $this->baseUrl . '/oauth/token';
+        $url = $this->baseUrl . '/oauth/token';
         
         // Change all credenatials
         $this->credentials = [
@@ -39,25 +41,12 @@ class SmsTo {
             'scope' => '*'
         ];
 
-        $headers = [
-            'Content-Type' => 'application/json',
-        ];
-
-        $client = new Client(['headers' => $headers, 'verify' => false]);
-        
-        $response = $client->post($authUrl, [
-                        'json' => $this->credentials,
-                    ])->getBody()->getContents();
-        $response = json_decode($response);
-
-        $this->accessToken = $response->access_token;
-
-        return $this->accessToken;
+        return $this->token($url);
     }
 
     public function refreshToken()
     {
-        $authUrl = $this->baseUrl . '/oauth/token';
+        $url = $this->baseUrl . '/oauth/token';
         
         // Change all credenatials
         $this->credentials = [
@@ -68,18 +57,40 @@ class SmsTo {
             'scope' => ''
         ];
 
+        return $this->token($url);
+    }
+
+    public function token($url)
+    {
+        // Check if we have accessToken saved already
+        if (Storage::disk('local')->exists('smsto/accessToken')) {
+            $dateExpired = Storage::disk('local')->get('smsto/accessTokenExpiredOn');
+            $now = Carbon::now()->toDateTimeString();
+            if ($dateExpired > $now) {
+                $this->accessToken = $accessToken = Storage::disk('local')->get('smsto/accessToken');
+                return $this->accessToken;
+            }
+        }
+
         $headers = [
             'Content-Type' => 'application/json',
         ];
 
         $client = new Client(['headers' => $headers, 'verify' => false]);
         
-        $response = $client->post($authUrl, [
+        $response = $client->post($url, [
                         'json' => $this->credentials,
                     ])->getBody()->getContents();
         $response = json_decode($response);
 
+        // We store the access token to storage with its expiration date and time
+        $date = Carbon::now()->addSeconds($response->expires_in);
+        Storage::disk('local')->put('smsto/accessTokenExpiredOn', $date->toDateTimeString());
+        Storage::disk('local')->put('smsto/accessToken', $response->access_token);
+
         $this->accessToken = $response->access_token;
+
+        return $this->accessToken;
     }
 
     public function sendSingle()
@@ -105,6 +116,20 @@ class SmsTo {
         $body = [
             'body' => $this->message,
             'to' => $this->recipients,
+            'send_id' => $this->senderId,
+            'callback_url' => $this->callbackUrl
+        ];
+        return $this->request($path, 'post', $body);
+    }
+
+    public function sendList()
+    {
+        $this->getAccessToken();
+        $path = $this->baseUrl . '/sms/send';
+        
+        $body = [
+            'body' => $this->message,
+            'to_list_id' => $this->listId,
             'send_id' => $this->senderId,
             'callback_url' => $this->callbackUrl
         ];

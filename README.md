@@ -72,7 +72,7 @@ Create your route
     	// Sending single SMS to one number
         public function send(SmsTo $sms)
         {
-            $messages = [['to' => '+63917*******', 'message' => 'This is test']];
+            $messages = [['to' => '+63917*******', 'message' => 'Hi Market!']];
             return $sms->setMessages($messages)
                        ->setSenderId('COLTD')
                        ->setCallbackUrl('https://mysite.org/smscallback')
@@ -89,6 +89,17 @@ Create your route
                        ->setSenderId('COLTD')
                        ->setCallbackUrl('https://mysite.org/smscallback')
                        ->sendMultiple();
+        }
+
+        // Sending single SMS to a list of numbers
+        public function sendList(SmsTo $sms)
+        {
+            $message = 'Hi Market!';
+            return $sms->setMessage($message)
+                       ->setListId(109)
+                       ->setSenderId('COLTD')
+                       ->setCallbackUrl('https://mysite.org/smscallback')
+                       ->sendList();
         }
     }
 ```
