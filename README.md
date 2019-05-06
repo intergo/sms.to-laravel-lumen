@@ -27,16 +27,16 @@ You will get a config file named `smsto.php` in your config directory. Customize
 ```php
 <?php
 
-	return [
-	    'grant_type' => 'password',
-	    'client_id' => env('SMSTO_CLIENT_ID'),
-	    'client_secret' => env('SMSTO_CLIENT_SECRET'),
-	    'username'=> env('SMSTO_EMAIL'),
-	    'password' => env('SMSTO_PASSWORD'),
-	    'scope' => '*',
+  return [
+      'grant_type' => 'password',
+      'client_id' => env('SMSTO_CLIENT_ID'),
+      'client_secret' => env('SMSTO_CLIENT_SECRET'),
+      'username'=> env('SMSTO_EMAIL'),
+      'password' => env('SMSTO_PASSWORD'),
+      'scope' => '*',
       'sender_id' => env('SMSTO_SENDER_ID'),
-	    'callback_url' => env('SMSTO_CALLBACK_URL'),
-	];
+      'callback_url' => env('SMSTO_CALLBACK_URL'),
+  ];
 ```
 
 
@@ -70,7 +70,7 @@ Create your route
     
     class SmsController extends Controller
     {
-    	// Sending single SMS to one number
+      // Sending single SMS to one number
         public function send(SmsTo $sms)
         {
             $messages = [['to' => '+63917*******', 'message' => 'Hi Market!']];
@@ -108,7 +108,17 @@ Create your route
 You can also use the helper for sending SMS
 
 ```php
-    smsto()->setMessages([['to' => '+63917*******', 'message' => 'test message']])->sendSingle()
+    $response = smsto()->setMessages([['to' => '+63917*******', 'message' => 'test message']])->sendSingle();
+    // Success response
+    [
+      "success" => true,
+      "message" => "Messages are queued for sending. Please check message logs on dashboard",
+    ]
+    // Error Response
+    [
+      "error" => true,
+      "message" => "Messages not found",
+    ]
 ```
 
 ## License
