@@ -128,31 +128,39 @@ You can also use the helper for sending SMS
 ```
 
 ```php
-<html>
-      <body>
-         <form method='POST'>
-            @if($errors->any())
-            <ul>
-            @foreach($errors->all() as $error)
-            <li><strong>{{ $error }}</strong></li>
-            @endforeach
-            <ul>
-            @endif
-        @if(session('success'))
-            <strong>{{ session('success') }}</strong>
-        @endif
-            <label for="to">Comma Separated Numbers</label>
-            <input type='text' name='to' />
-            <br>
-            <label>Message/Body</label>
-            <textarea name='messages'></textarea>
-            <br><br>
-            <button type='submit'>Send</button>
-            @csrf
-      </form>
-    </body>
-</html>
-```
+<?php
 
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Intergo\SmsTo\SmsTo;
+
+class TestSmsController extends Controller
+{
+    public function sendsms()
+    {
+        return view('smsto.sendsms');
+    }
+
+    public function postSendSms(Request $request, SmsTo $sms)
+    {
+        $request->validate([
+            'to' => 'required',
+            'messages' => 'required',
+        ]);
+        $to = explode(',', request('to'));
+        $response = $sms->setMessage(request('messages'))
+                        ->setRecipients($to)
+                        ->setSenderId('COLTD')
+                        ->setCallbackUrl('https://mysite.org/smscallback')
+                        ->sendMultiple();
+        if ($response['success'] == true) {
+            return back()->with('success', 'Messages has been queued and ready to be sent.');
+        } else {
+            return back()->withErrors($response['errors']);
+        }
+    }
+}
+```
 ## License
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
