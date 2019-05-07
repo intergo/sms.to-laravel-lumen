@@ -127,40 +127,5 @@ You can also use the helper for sending SMS
     ]
 ```
 
-```php
-<?php
-
-namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-use Intergo\SmsTo\SmsTo;
-
-class TestSmsController extends Controller
-{
-    public function sendsms()
-    {
-        return view('smsto.sendsms');
-    }
-
-    public function postSendSms(Request $request, SmsTo $sms)
-    {
-        $request->validate([
-            'to' => 'required',
-            'messages' => 'required',
-        ]);
-        $to = explode(',', request('to'));
-        $response = $sms->setMessage(request('messages'))
-                        ->setRecipients($to)
-                        ->setSenderId('COLTD')
-                        ->setCallbackUrl('https://mysite.org/smscallback')
-                        ->sendMultiple();
-        if ($response['success'] == true) {
-            return back()->with('success', 'Messages has been queued and ready to be sent.');
-        } else {
-            return back()->withErrors($response['errors']);
-        }
-    }
-}
-```
 ## License
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
