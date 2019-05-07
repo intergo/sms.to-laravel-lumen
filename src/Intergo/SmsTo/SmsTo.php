@@ -134,16 +134,15 @@ class SmsTo {
     /**
      * Access token.
      *
-     * @return string
+     * @return string|bool
      */
     public function token($url)
     {
         // Check if we have accessToken saved already
         if (Storage::disk('local')->exists('smsto/accessToken')) {
             $dateExpired = Storage::disk('local')->get('smsto/accessTokenExpiredOn');
-            $now = Carbon::now()->toDateTimeString();
-            if ($dateExpired > $now) {
-                $this->accessToken = $accessToken = Storage::disk('local')->get('smsto/accessToken');
+            if ($dateExpired > Carbon::now()->toDateTimeString()) {
+                $this->accessToken = Storage::disk('local')->get('smsto/accessToken');
                 return $this->accessToken;
             }
         }
@@ -159,6 +158,8 @@ class SmsTo {
 
             return $this->accessToken;
         }
+
+        return false;
     }
 
     /**
@@ -177,6 +178,12 @@ class SmsTo {
         return $this->request($path, 'post', $body);
     }
 
+    /**
+     * Sends personalized SMS to a single number or array of 
+     * numbers with personalized SMS.
+     *
+     * @return array
+     */
     public function sendSingle()
     {
         $this->getAccessToken();
@@ -191,6 +198,11 @@ class SmsTo {
         return $this->request($path, 'post', $body);
     }
 
+    /**
+     * This will send a message to multiple numbers specified in request body.
+     *
+     * @return array
+     */
     public function sendMultiple()
     {
         $this->getAccessToken();
@@ -206,6 +218,11 @@ class SmsTo {
         return $this->request($path, 'post', $body);
     }
 
+    /**
+     * Sending single SMS to a list.
+     *
+     * @return array
+     */
     public function sendList()
     {
         $this->getAccessToken();
@@ -292,6 +309,15 @@ class SmsTo {
         return $this;
     }
 
+    /**
+     * Send Request
+     *
+     * @param string $path
+     * @param string $method
+     * @param array $data
+     *
+     * @return array
+     */
     public function request($path, $method, $data = [])
     {
         $headers = [
@@ -341,6 +367,13 @@ class SmsTo {
         return $response;
     }
 
+    /**
+     * Format exceptions message
+     *
+     * @param Exception $e
+     *
+     * @return mixed
+     */
     public function exception($e)
     {
         if ($e->hasResponse()) {

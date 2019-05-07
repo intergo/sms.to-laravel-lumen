@@ -16,10 +16,17 @@ class ServiceProvider extends BaseServiceProvider {
     {
         $this->publishes([
             __DIR__ . '/../../config/smsto.php' => config_path('smsto.php'),
-        ]);
+        ], 'config');
+
+        $this->publishes([
+            __DIR__.'/../../views' => resource_path('views/vendor/smsto'),
+        ], 'views');
+        
         $this->mergeConfigFrom(
             __DIR__ . '/../../config/smsto.php', 'smsto'
         );
+
+        $this->loadViewsFrom(__DIR__.'/../../views', 'smsto');
     }
 
     /**

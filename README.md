@@ -1,5 +1,5 @@
 # laravel-smsto
-Laravel 5 package for sending sms in SMS.to
+Laravel 5 package for sending SMS via SMS.to REST API
 
 ## Installation
 
@@ -18,7 +18,7 @@ You might need to add `Intergo\SmsTo\ServiceProvider::class`, to the providers a
 Publish the configuration file
 
 ```shell
-php artisan vendor:publish --provider="Intergo\SmsTo\ServiceProvider"
+php artisan vendor:publish --provider="Intergo\SmsTo\ServiceProvider" --tag=config
 ```
 
 You will get a config file named `smsto.php` in your config directory. Customise the defaults to your smsto configurations.
@@ -39,6 +39,12 @@ You will get a config file named `smsto.php` in your config directory. Customise
   ];
 ```
 
+If you want to use the existing view file then run command
+```shell
+php artisan vendor:publish --provider="Intergo\SmsTo\ServiceProvider" --tag=views
+```
+
+It will generate view files located in `resources/views/vendor/smsto`
 
 ## Usage
 
