@@ -21,7 +21,7 @@ Publish the configuration file
 php artisan vendor:publish --provider="Intergo\SmsTo\ServiceProvider"
 ```
 
-You will get a config file named `smsto.php` in your config directory. Customize the defaults to your smsto configurations.
+You will get a config file named `smsto.php` in your config directory. Customise the defaults to your smsto configurations.
 
 
 ```php
