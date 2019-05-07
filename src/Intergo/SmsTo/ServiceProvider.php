@@ -3,6 +3,7 @@
 namespace Intergo\SmsTo;
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
+use Illuminate\Support\Facades\Blade;
 use Intergo\SmsTo\SmsTo;
 
 class ServiceProvider extends BaseServiceProvider {
@@ -21,12 +22,17 @@ class ServiceProvider extends BaseServiceProvider {
         $this->publishes([
             __DIR__.'/../../views' => resource_path('views/vendor/smsto'),
         ], 'views');
-        
+
         $this->mergeConfigFrom(
             __DIR__ . '/../../config/smsto.php', 'smsto'
         );
 
         $this->loadViewsFrom(__DIR__.'/../../views', 'smsto');
+
+        // @error
+        // Blade::directive('error', function ($expression) {
+        //     return '';
+        // });
     }
 
     /**

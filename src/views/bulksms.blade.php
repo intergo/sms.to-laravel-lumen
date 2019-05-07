@@ -1,22 +1,24 @@
 <html>
       <body>
-         <form action='' method='post'>
-              @csrf
-              @if($errors->any())
-              <ul>
-             @foreach($errors->all() as $error)
-            <li> {{ $error }} </li>
-             @endforeach
+         <form method='POST'>
+            @if($errors->any())
+            <ul>
+            @foreach($errors->all() as $error)
+            <li><strong>{{ $error }}</strong></li>
+            @endforeach
+            <ul>
+            @endif
+        @if(session('success'))
+            <strong>{{ session('success') }}</strong>
         @endif
-
-        @if( session( 'success' ) )
-             {{ session( 'success' ) }}
-        @endif
-             <label>Phone numbers (seperate with a comma [,])</label>
-             <input type='text' name='numbers' />
-            <label>Message</label>
-            <textarea name='message'></textarea>
-            <button type='submit'>Send!</button>
+            <label for="to">Comma Separated Numbers</label>
+            <input type='text' name='to' />
+            <br>
+            <label>Message/Body</label>
+            <textarea name='messages'></textarea>
+            <br><br>
+            <button type='submit'>Send</button>
+            @csrf
       </form>
     </body>
 </html>
