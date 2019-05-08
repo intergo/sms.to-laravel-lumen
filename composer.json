@@ -37,6 +37,5 @@
                 "SmsTo": "Intergo\\SmsTo\\Facades\\SmsToFacade"
             }
         }
-    },
-    "minimum-stability": "dev"
+    }
 }
