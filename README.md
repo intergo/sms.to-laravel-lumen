@@ -111,21 +111,5 @@ Create your route
     }
 ```
 
-You can also use the helper for sending SMS
-
-```php
-    $response = smsto()->setMessages([['to' => '+63917*******', 'message' => 'test message']])->sendSingle();
-    // Success response
-    [
-      "success" => true,
-      "message" => "Messages are queued for sending. Please check message logs on dashboard",
-    ]
-    // Error Response
-    [
-      "error" => true,
-      "message" => "Messages not found",
-    ]
-```
-
 ## License
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
