@@ -72,26 +72,26 @@ Create your route
     namespace App\Http\Controllers;
     
     use Illuminate\Http\Request;
-    use Intergo\SmsTo\SmsTo;
+    use SmsTo;
     
     class SmsController extends Controller
     {
       // Sending single SMS to one number
-        public function send(SmsTo $sms)
+        public function send()
         {
             $messages = [['to' => '+63917*******', 'message' => 'Hi Market!']];
-            return $sms->setMessages($messages)
+            return SmsTo::setMessages($messages)
                        ->setSenderId('COLTD')
                        ->setCallbackUrl('https://mysite.org/smscallback')
                        ->sendSingle();
         }
 
         // Sending single SMS to multiple numbers
-        public function broadcast(SmsTo $sms)
+        public function broadcast()
         {
             $message = 'Hi Market!';
             $recipients = ['+63917********', '+63919********'];
-            return $sms->setMessage($message)
+            return SmsTo::setMessage($message)
                        ->setRecipients($recipients)
                        ->setSenderId('COLTD')
                        ->setCallbackUrl('https://mysite.org/smscallback')
@@ -99,10 +99,10 @@ Create your route
         }
 
         // Sending single SMS to a list of numbers
-        public function sendList(SmsTo $sms)
+        public function sendList()
         {
             $message = 'Hi Market!';
-            return $sms->setMessage($message)
+            return SmsTo::setMessage($message)
                        ->setListId(109)
                        ->setSenderId('COLTD')
                        ->setCallbackUrl('https://mysite.org/smscallback')
