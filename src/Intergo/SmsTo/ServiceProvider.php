@@ -4,7 +4,7 @@ namespace Intergo\SmsTo;
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Illuminate\Support\Facades\Blade;
-use Intergo\SmsTo\SmsTo;
+//use Intergo\SmsTo\SmsTo;
 use Intergo\SmsTo\Http\Client as SmsToClient;
 
 class ServiceProvider extends BaseServiceProvider {
@@ -43,19 +43,18 @@ class ServiceProvider extends BaseServiceProvider {
      */
     public function register()
     {
-        $this->app->bind('laravel-smsto', function() {
-            return new SmsTo();
-        });
+        // $this->app->bind('laravel-smsto', function() {
+        //     return new SmsTo();
+        // });
 
         // If PHP SDK is ready
-        // $this->app->bind('laravel-smsto', function() {
-        //     return new SmsToClient(
-        //         config('smsto.client_id'),
-        //         config('smsto.client_secret'),
-        //         config('smsto.username'),
-        //         config('smsto.password'),
-        //     );
-        // });
+        $this->app->bind('laravel-smsto', function() {
+            return new SmsToClient(
+                config('smsto.client_id'),
+                config('smsto.client_secret'),
+                config('smsto.username'),
+                config('smsto.password')
+            );
+        });
     }
-
 }
