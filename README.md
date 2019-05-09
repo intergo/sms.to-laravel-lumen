@@ -166,10 +166,10 @@ $app->configure('filesystems');
 // routes/web.php
 $router->post('send', function () {
     $messages = [['to' => '+63917*******', 'message' => 'Hi Market!']];
-            return \SmsTo::setMessages($messages)
-                       ->setSenderId('COLTD')
-                       ->setCallbackUrl('https://mysite.org/smscallback')
-                       ->sendSingle();
+    return \SmsTo::setMessages($messages)
+               ->setSenderId('COLTD')
+               ->setCallbackUrl('https://mysite.org/smscallback')
+               ->sendSingle();
 });
 ```
 
