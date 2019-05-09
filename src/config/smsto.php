@@ -9,5 +9,6 @@ return [
     'scope' => '*',
     'sender_id' => env('SMSTO_SENDER_ID'),
     'callback_url' => env('SMSTO_CALLBACK_URL'),
+    'environment' => env('SMSTO_ENVIRONMENT', 'sandbox'),
     'base_url' => env('SMSTO_BASE_URL', 'https://api.sms.to/v1'),
 ];
