@@ -111,5 +111,53 @@ Create your route
     }
 ```
 
+## Lumen
+
+Uncomment the following lines in the bootstrap file:
+```php
+// bootstrap/app.php:
+$app->withFacades();
+$app->withEloquent();
+
+// Add SmsTo Facade
+if (!class_exists('SmsTo')) {
+    class_alias('Intergo\SmsTo\Facades\SmsToFacade', 'SmsTo');
+}
+```
+Configure the service provider (and AppServiceProvider if not already enabled):
+
+```php
+// bootstrap/app.php:
+$app->register(App\Providers\AppServiceProvider::class);
+$app->register(Intergo\SmsTo\ServiceProvider::class);
+```
+
+Update the AppServiceProvider register method to bind the filesystem manager to the IOC container:
+
+```php
+// app/Providers/AppServiceProvider.php
+public function register()
+{
+    $this->app->singleton('filesystem', function ($app) {
+        return $app->loadComponent('filesystems', 'Illuminate\Filesystem\FilesystemServiceProvider', 'filesystem');
+    });
+
+    $this->app->bind('Illuminate\Contracts\Filesystem\Factory', function($app) {
+        return new \Illuminate\Filesystem\FilesystemManager($app);
+    });
+}
+```
+
+Manually copy the package config file to `app\config\smsto.php` (you may need to create the config directory if it does not already exist).
+
+Copy the Laravel filesystem config file into `app\config\filesystem.php`. You should add a disk configuration to the filesystem config matching the config file.
+
+Finally, update boostrap/app.php to load both config files:
+
+```php
+// bootstrap/app.php
+$app->configure('smsto');
+$app->configure('filesystems');
+```
 ## License
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
