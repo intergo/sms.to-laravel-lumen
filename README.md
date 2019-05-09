@@ -113,6 +113,12 @@ Create your route
 
 ## Lumen
 
+Require this package with composer.
+
+```shell
+composer require intergo/laravel-smsto
+```
+
 Uncomment the following lines in the bootstrap file:
 ```php
 // bootstrap/app.php:
