@@ -159,5 +159,19 @@ Finally, update boostrap/app.php to load both config files:
 $app->configure('smsto');
 $app->configure('filesystems');
 ```
+
+## Send SMS using Lumen
+
+```php
+// routes/web.php
+$router->post('send', function () {
+    $messages = [['to' => '+63917*******', 'message' => 'Hi Market!']];
+            return \SmsTo::setMessages($messages)
+                       ->setSenderId('COLTD')
+                       ->setCallbackUrl('https://mysite.org/smscallback')
+                       ->sendSingle();
+});
+```
+
 ## License
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
