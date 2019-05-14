@@ -1,5 +1,5 @@
 # laravel-smsto
-Laravel 5 package for sending SMS via SMS.to REST API
+Laravel 5 package for sending SMS via [SMS.to](https://sms.to/) REST API
 
 ## Installation
 
