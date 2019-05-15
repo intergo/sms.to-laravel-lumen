@@ -95,11 +95,11 @@ Please note that using these methods will override the values set in the configu
  $messages = [
     [
         'to' => '+4474*******',
-        'message' => 'Filip - Testing Laravel Package'
+        'message' => 'Hello World!'
     ],
     [
         'to' => '+35799******',
-        'message' => 'Filip - Testing Laravel Package2'
+        'message' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
     ],
 ];
 
