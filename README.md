@@ -2,9 +2,9 @@
   <a href="https://sms.to"><img width="400" src="https://sms.to/images/logo.svg"></a>
 </p>
 
-<h1 align="center">
+<h2 align="center">
 API integration for Laravel 
-</h1>
+</h2>
 
 ## Introduction
 
