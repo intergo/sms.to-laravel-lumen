@@ -12,7 +12,7 @@ This package allows you to easily intergate [SMS.to API](https://sms.to/api-docs
 
 ## Requirements
 
-This package requires Laravel 5.7 or higher (or Lumen 5) and you need to have a working [SMS.to](https://sms.to) account with sufficient balance. 
+This package requires Laravel 5.7 or higher and you need to have a working [SMS.to](https://sms.to) account with sufficient balance. 
 
 ## Installation
 
