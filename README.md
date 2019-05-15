@@ -6,8 +6,6 @@
 API integration for Laravel 
 </h2>
 
-## Introduction
-
 This package allows you to easily intergate [SMS.to API](https://sms.to/api-docs) into Laravel and Lumen projects.
 
 [SMS.to](https://sms.to) is a bulk SMS marketing platform that offers a smarter way for businesses to communicate with customers through multiple channels. Reach customers in their preferred channel through SMS, WhatsApp or Viber Messages. For more details, please visit: https://sms.to
