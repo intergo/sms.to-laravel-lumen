@@ -56,7 +56,7 @@ in class files (typically controllers) in which you will use this package for se
 
 ### Sending SMS to multiple numbers (broadcasting):
 ```php
-// Text message that will be sent to the multiple numbers:
+// Text message that will be sent to multiple numbers:
 $message = 'Hello World!';
 
 // Array of mobile phone numbers (starting with the "+" sign and country code):
