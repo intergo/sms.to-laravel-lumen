@@ -1,114 +1,111 @@
-# laravel-smsto
-Laravel 5 package for sending SMS via [SMS.to](https://sms.to/) REST API
+<p align="center">
+  <a href="https://sms.to"><img width="400" src="https://sms.to/images/logo.svg"></a>
+</p>
+
+<h1 align="center">
+API integration for Laravel 
+</h1>
+
+## Introduction
+
+This package allows you to easily intergate [SMS.to API](https://sms.to/api-docs) into Laravel and Lumen projects.
+
+[SMS.to](https://sms.to) is a bulk SMS marketing platform that offers a smarter way for businesses to communicate with customers through multiple channels. Reach customers in their preferred channel through SMS, WhatsApp or Viber Messages. For more details, please visit: https://sms.to
+
+## Requirements
+
+This package requires Laravel 5 (or Lumen 5) and you need to have a working [SMS.to](https://sms.to) account with sufficient balance. 
 
 ## Installation
 
-You need to have a working account on Sms.To with sufficient balance loaded to be able to use this package. If you do not have one, [please get one here](https://sms.to).
-
-Require this package with composer.
+You can install this package into Laravel project via Composer:
 
 ```shell
 composer require intergo/laravel-smsto
 ```
 
-You might need to add `Intergo\SmsTo\ServiceProvider::class`, to the providers array `config/app.php` if your laravel version is less than 5.5.
+If you are using Laravel 5.5 or above, the package will automatically register the `SmsTo` provider.
+If you are using Laravel 5.4 or below, add `Intergo\SmsTo\ServiceProvider::class` to the `providers` array in  `config/app.php`:
+
+```php
+'providers' => [
+    // Other service providers...
+
+    Intergo\SmsTo\ServiceProvider::class,
+],
+```
+The instructions for installing this package into Lumen project are given [below](#lumen).
 
 ## Configuration
 
-Publish the configuration file
+Publish the configuration file:
 
 ```shell
 php artisan vendor:publish --provider="Intergo\SmsTo\ServiceProvider" --tag=config
 ```
+Then set the values for the parameters in `config/smsto.php`. Credentials (`client_id`, `client_secret`, `username` and `password`) are required. Optionally, you can set your sender ID (`sender_id`) and callback URL (`callback_url`).
 
-You will get a config file named `smsto.php` in your config directory. Customise the defaults to your smsto configurations.
+It is recommended that you set all these configuration values in your `.env` file:
 
-
-```php
-<?php
-
-  return [
-      'grant_type' => 'password',
-      'client_id' => env('SMSTO_CLIENT_ID'),
-      'client_secret' => env('SMSTO_CLIENT_SECRET'),
-      'username'=> env('SMSTO_EMAIL'),
-      'password' => env('SMSTO_PASSWORD'),
-      'scope' => '*',
-      'sender_id' => env('SMSTO_SENDER_ID'),
-      'callback_url' => env('SMSTO_CALLBACK_URL'),
-  ];
-```
-
-If you want to use the existing view file then run command
 ```shell
-php artisan vendor:publish --provider="Intergo\SmsTo\ServiceProvider" --tag=views
+#REQUIRED:
+SMSTO_CLIENT_ID=
+SMSTO_CLIENT_SECRET=
+SMSTO_EMAIL=
+SMSTO_PASSWORD=
+#OPTIONAL:
+SMSTO_SENDER_ID=
+SMSTO_CALLBACK_URL=
 ```
-
-It will generate view files located in `resources/views/vendor/smsto`
 
 ## Usage
 
-Change or add configuration in you `.env` file
-
-```shell
-SMSTO_CLIENT_ID=xyxy1234
-SMSTO_CLIENT_SECRET=xyz1234567
-SMSTO_EMAIL=email@sms.to
-SMSTO_PASSWORD=y2kP@szword
-SMSTO_SENDER_ID=smsto
-SMSTO_CALLBACK_URL=https://mysite.org/smscallback
-```
-
-Create your route
+After the package is installed and configured, the only thing you have to do is to use the `SmsTo` facade:
 
 ```php
-    Route::post('/sms/send', 'SmsController@send');
-    Route::post('/sms/broadcast', 'SmsController@broadcast');
+use SmsTo;
 ```
+in class files (typically controllers) in which you will use this package for sending SMS.
+
+### Sending SMS to multiple numbers (broadcasting):
+```php
+// Text message that will be sent to the multiple numbers:
+$message = 'Hello World!';
+
+// Array of mobile phone numbers (starting with the "+" sign and country code):
+$recipients = ['+4474*******', '+35799******', '+38164*******'];
+
+// Send (broadcast) the $message to $recipients: 
+SmsTo::setMessage($message)
+    ->setRecipients($recipients)
+    ->sendMultiple();
+```
+As for the sender ID and callback URL, the values set in the configuration file will be used by default. You can also specify these values by using the `->setSenderId()` and `->setCallbackUrl()` methods:
+```php
+SmsTo::setMessage($message)
+    ->setRecipients($recipients)
+    ->setSenderId('YOUR_NAME')
+    ->setCallbackUrl('https://your-site.com/smscallback')
+    ->sendMultiple();
+```
+Please note that using these methods will override the values set in the configuration file.
+
+
+### Sending different SMS to single numbers:
 
 ```php
-    <?php
-    
-    namespace App\Http\Controllers;
-    
-    use Illuminate\Http\Request;
-    use SmsTo;
-    
-    class SmsController extends Controller
-    {
-      // Sending single SMS to one number
-        public function send()
-        {
-            $messages = [['to' => '+63917*******', 'message' => 'Hi Market!']];
-            return SmsTo::setMessages($messages)
-                       ->setSenderId('COLTD')
-                       ->setCallbackUrl('https://mysite.org/smscallback')
-                       ->sendSingle();
-        }
+ $messages = [
+    [
+        'to' => '+4474*******',
+        'message' => 'Filip - Testing Laravel Package'
+    ],
+    [
+        'to' => '+35799******',
+        'message' => 'Filip - Testing Laravel Package2'
+    ],
+];
 
-        // Sending single SMS to multiple numbers
-        public function broadcast()
-        {
-            $message = 'Hi Market!';
-            $recipients = ['+63917********', '+63919********'];
-            return SmsTo::setMessage($message)
-                       ->setRecipients($recipients)
-                       ->setSenderId('COLTD')
-                       ->setCallbackUrl('https://mysite.org/smscallback')
-                       ->sendMultiple();
-        }
-
-        // Sending single SMS to a list of numbers
-        public function sendList()
-        {
-            $message = 'Hi Market!';
-            return SmsTo::setMessage($message)
-                       ->setListId(109)
-                       ->setSenderId('COLTD')
-                       ->setCallbackUrl('https://mysite.org/smscallback')
-                       ->sendList();
-        }
-    }
+SmsTo::setMessages($messages)->sendSingle();
 ```
 
 ## Lumen
