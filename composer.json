@@ -17,8 +17,6 @@
     ],
     "require": {
         "php": ">=7.1.3",
-        "illuminate/filesystem": "^5.2",
-        "league/flysystem": "^1.0",
         "guzzlehttp/guzzle": "~6.0",
         "intergo/smsto-php": ">=0.0.1"
     },
