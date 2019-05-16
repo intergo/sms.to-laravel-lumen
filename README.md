@@ -153,7 +153,7 @@ public function register()
 
 Manually copy the package config file to `app\config\smsto.php` (you may need to create the config directory if it does not already exist).
 
-Copy the Laravel filesystem config file into `app\config\filesystem.php`. You should add a disk configuration to the filesystem config matching the config file.
+Copy the Laravel filesystem config file into `app\config\filesystems.php`. You should add a disk configuration to the filesystem config matching the config file.
 
 Finally, update boostrap/app.php to load both config files:
 
