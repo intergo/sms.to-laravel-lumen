@@ -9,6 +9,7 @@ use League\Flysystem\Adapter\Local as LocalAdapter;
 use League\Flysystem\Filesystem as Flysystem;
 use League\Flysystem\MountManager;
 
+// From https://github.com/laravelista/lumen-vendor-publish
 class PublishCommand extends Command
 {
     /**
