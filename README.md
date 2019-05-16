@@ -23,12 +23,15 @@ composer require intergo/laravel-smsto
 ```
 
 If you are using Laravel 5.5 or above, the package will automatically register the `SmsTo` provider.
-If you are using Laravel 5.4 or below, add `Intergo\SmsTo\ServiceProvider::class` to the `providers` array in  `config/app.php`:
+If you are using Laravel 5.4 or below, add `Intergo\SmsTo\ServiceProvider::class` to the `providers` array and `SmsTo => Intergo\SmsTo\Facades\SmsToFacade::class` in the `aliases` array in  `config/app.php`:
 
 ```php
 'providers' => [
     // Other service providers...
     Intergo\SmsTo\ServiceProvider::class,
+],
+'aliases' => [
+    SmsTo => Intergo\SmsTo\Facades\SmsToFacade::class,
 ],
 ```
 The instructions for installing this package into Lumen project are given [below](#lumen).
