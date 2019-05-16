@@ -135,8 +135,25 @@ $app->register(App\Providers\AppServiceProvider::class);
 $app->register(Intergo\SmsTo\LumenServiceProvider::class);
 ```
 
+Publish the configuration file:
 
-Manually copy the package config file to `app\config\smsto.php` (you may need to create the config directory if it does not already exist).
+```shell
+php artisan vendor:publish --provider="Intergo\SmsTo\LumenServiceProvider" --tag=config
+```
+Then set the values for the parameters in `config/smsto.php`. Credentials (`client_id`, `client_secret`, `username` and `password`) are required. Optionally, you can set your sender ID (`sender_id`) and callback URL (`callback_url`).
+
+It is recommended that you set all these configuration values in your `.env` file:
+
+```shell
+#REQUIRED:
+SMSTO_CLIENT_ID=
+SMSTO_CLIENT_SECRET=
+SMSTO_EMAIL=
+SMSTO_PASSWORD=
+#OPTIONAL:
+SMSTO_SENDER_ID=
+SMSTO_CALLBACK_URL=
+```
 
 Finally, update boostrap/app.php to load both config files:
 
