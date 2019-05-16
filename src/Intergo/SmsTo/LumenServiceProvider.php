@@ -3,7 +3,6 @@
 namespace Intergo\SmsTo;
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
-use Illuminate\Support\Facades\Blade;
 use Carbon\Carbon;
 use Storage;
 use Intergo\SmsTo\Http\Client as SmsToClient;
