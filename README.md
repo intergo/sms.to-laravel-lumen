@@ -152,6 +152,13 @@ SmsTo::getList(1);
 
 When `Callback URL` is specified, we send Callback data to the `Callback URL`. The parameters are sent via a POST request to your `Callback URL`. SMS.to will be expecting response 200 OK in return, or it will keep retrying every 15 minutes until the Callback expires (up to 48 hours).
 
+```php
+public function callback(Request $request)
+{
+    $request->trackingId;
+}
+```
+
 ## Lumen
 
 Require this package with composer.
