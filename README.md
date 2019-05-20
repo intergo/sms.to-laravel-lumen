@@ -121,6 +121,13 @@ SmsTo::getBalance();
 SmsTo::getLists(['limit' => 10, 'page' => 1, 'sort' => 'created_at', 'search' => 'My List']);
 ```
 
+| Parameter        | Value           | Required  |
+| ------------- |-------------| -----:|
+| limit      | 100 | No |
+| page      | 1      |   No |
+| sort | created_at      |   No |
+| search | name | No |
+
 ### Fetch single list:
 
 ```php
