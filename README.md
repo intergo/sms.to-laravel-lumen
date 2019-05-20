@@ -154,7 +154,7 @@ When `Callback URL` is specified, we send Callback data to the `Callback URL`. T
 
 ```php
 // routes/web.php
-Route::post('/smsto/webhook', 'SmsToController@callback');
+Route::post('/smsto/callback', 'SmsToController@callback');
 ```
 
 ```php
