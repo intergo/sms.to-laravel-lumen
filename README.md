@@ -122,7 +122,7 @@ SmsTo::getLists(['limit' => 10, 'page' => 1, 'sort' => 'created_at', 'search' =>
 ```
 
 | Parameter        | Value           | Required  |
-| ------------- |-------------| -----:|
+| ------------- |-------------| -----|
 | limit      | 100 | No |
 | page      | 1      |   No |
 | sort | created_at      |   No |
@@ -131,9 +131,11 @@ SmsTo::getLists(['limit' => 10, 'page' => 1, 'sort' => 'created_at', 'search' =>
 ### Fetch single list:
 
 ```php
-SmsTo::getList(12);
+SmsTo::getList(1);
 ```
-
+| Parameter        | Value           | Required  |
+| ------------- |-------------| -----|
+| list id      | 1 | Yes |
 ## Lumen
 
 Require this package with composer.
