@@ -118,8 +118,13 @@ SmsTo::getBalance();
 ### Fetch paginated lists:
 
 ```php
-
 SmsTo::getLists(['limit' => 10, 'page' => 1, 'sort' => 'created_at', 'search' => 'My List']);
+```
+
+### Fetch single list:
+
+```php
+SmsTo::getList(12);
 ```
 
 ## Lumen
