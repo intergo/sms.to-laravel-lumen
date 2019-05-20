@@ -159,6 +159,15 @@ public function callback(Request $request)
 }
 ```
 
+| Parameter        | Sample           |
+| ------------- |-------------|
+| trackingId      | 185c9d63-dae2-4614-b0f4-48453e870dcf |
+| messageId      | 185c9d63-dae2-4614-b0f4-48453e870dcf      |
+| phone | +3579958****      |
+| status | SENT |
+| parts | 1 |
+| price | 0.015 |
+
 ## Lumen
 
 Require this package with composer.
