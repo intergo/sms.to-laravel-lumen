@@ -150,7 +150,7 @@ SmsTo::getList(1);
 
 ### Handling Webhook/Callback
 
-When `Callback URL` is specified, we send Callback data to the `Call URL`. The parameters are sent via a POST request to your `Callback URL`. SMS.to will be expecting response 200 OK in return, or it will keep retrying every 15 minutes until the Callback expires (up to 48 hours).
+When `Callback URL` is specified, we send Callback data to the `Callback URL`. The parameters are sent via a POST request to your `Callback URL`. SMS.to will be expecting response 200 OK in return, or it will keep retrying every 15 minutes until the Callback expires (up to 48 hours).
 
 ## Lumen
 
