@@ -161,6 +161,7 @@ Route::post('/smsto/callback', 'SmsToController@callback');
 // SmsToController.php
 public function callback(Request $request)
 {
+    // Use following data to update status of your sms.
     $request->trackingId;
     $request->messageId;
     $request->phone;
