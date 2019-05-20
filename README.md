@@ -108,6 +108,20 @@ Please note that using these methods will override the values set in the configu
 SmsTo::setMessages($messages)->sendSingle();
 ```
 
+### Get Balance:
+
+```php
+
+SmsTo::getBalance();
+```
+
+### Fetch paginated lists:
+
+```php
+
+SmsTo::getLists(['limit' => 10, 'page' => 1, 'sort' => 'created_at', 'search' => 'My List']);
+```
+
 ## Lumen
 
 Require this package with composer.
