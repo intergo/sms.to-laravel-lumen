@@ -108,6 +108,17 @@ Please note that using these methods will override the values set in the configu
 SmsTo::setMessages($messages)->sendSingle();
 ```
 
+### Sending single SMS to a list:
+
+```php
+    $message = 'Hello World!';
+    SmsTo::setMessage($message)
+     ->setListId(1)
+     ->setSenderId('YOUR_NAME')
+     ->setCallbackUrl('https://your-site.com/smscallback')
+     ->sendList();
+```
+
 ### Get Balance:
 
 ```php
