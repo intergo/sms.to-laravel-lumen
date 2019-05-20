@@ -118,7 +118,7 @@ SmsTo::getBalance();
 ### Fetch paginated lists:
 
 ```php
-SmsTo::getLists(['limit' => 10, 'page' => 1, 'sort' => 'created_at', 'search' => 'My List']);
+SmsTo::getLists(['limit' => 100, 'page' => 1, 'sort' => 'created_at', 'search' => 'My List']);
 ```
 
 | Parameter        | Value           | Required  |
