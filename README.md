@@ -147,6 +147,9 @@ SmsTo::getList(1);
 | Parameter        | Value           | Required  |
 | ------------- |-------------| -----|
 | list id      | 1 | Yes |
+
+### Handling Webhook/Callback:
+
 ## Lumen
 
 Require this package with composer.
