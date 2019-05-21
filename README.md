@@ -119,12 +119,6 @@ SmsTo::setMessages($messages)->sendSingle();
      ->sendList();
 ```
 
-### Get Balance:
-
-```php
-
-SmsTo::getBalance();
-```
 
 ### Fetch paginated lists:
 
@@ -147,6 +141,24 @@ SmsTo::getList(1);
 | Parameter        | Value           | Required  |
 | ------------- |-------------| -----|
 | list id      | 1 | Yes |
+
+
+### Get Balance:
+
+To get the current balance of your [SMS.to](https://sms.to) account as well as the approximate number of messages you can send:
+
+```php
+SmsTo::getBalance();
+```
+Response: 
+
+```php
+array: [
+  "balance" => 1296.81
+  "currency" => "EUR"
+  "sms_count" => 6454 // REMAINING SMS (APROX.)
+]
+```
 
 ### Handling Webhook/Callback
 
