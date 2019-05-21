@@ -118,7 +118,7 @@ The following parameters can be specified:
 
 | Parameter | Type    | Description                                                                                            | Default Value | Required |
 |-----------|---------|--------------------------------------------------------------------------------------------------------|---------------|----------|
-| limit     | integer | The number of records per page.                                                                         | 100           | No       |
+| limit     | integer | The number of lists per page.                                                                         | 100           | No       |
 | page      | integer | The page number (when you are using pagination).                                                        | 1             | No       |
 | sort      | string  | The field which you want to sort,  e.g. use `created_at` for ASC order or `-created_at` for DESC order. | created_at    | No       |
 | search    | string  | Keywords to search for a list name.                                                                     |               | No       |
