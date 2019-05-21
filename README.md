@@ -107,45 +107,46 @@ Please note that using these methods will override the values set in the configu
 
 SmsTo::setMessages($messages)->sendSingle();
 ```
+### Working with lists
+With your [SMS.to](https://sms.to) account you can create and manage your lists on https://sms.to/app#/manage/lists. Creating a list allows you to manage your customers more efficiently. It enables features like *Optout Management* and *Personalisation*.
 
-### Sending single SMS to a list:
-
-```php
-    $message = 'Hello World!';
-    SmsTo::setMessage($message)
-     ->setListId(1)
-     ->setSenderId('YOUR_NAME')
-     ->setCallbackUrl('https://your-site.com/smscallback')
-     ->sendList();
-```
-
-
-### Fetch paginated lists:
-
+**Fetch paginated lists:**
 ```php
 SmsTo::getLists(['limit' => 100, 'page' => 1, 'sort' => 'created_at', 'search' => 'My List']);
 ```
+The following parameters can be specified:
 
-| Parameter        | Value           | Required  |
-| ------------- |-------------| -----|
-| limit      | 100 | No |
-| page      | 1      |   No |
-| sort | created_at      |   No |
-| search | name | No |
+| Parameter | Type    | Description                                                                                            | Default Value | Required |
+|-----------|---------|--------------------------------------------------------------------------------------------------------|---------------|----------|
+| limit     | integer | The number of records per page                                                                         | 100           | No       |
+| page      | integer | The page number (when you are using pagination)                                                        | 1             | No       |
+| sort      | string  | The field which you want to sort,  e.g. use `created_at` for ASC order or `-created_at` for DESC order | created_at    | No       |
+| search    | string  | Keywords to search for a list name                                                                     |               | No       |
 
-### Fetch single list:
+The response will be in `array` format following the structure provided in our API documentation: https://sms.to/api-docs/endpoints.html#fetch-lists
+
+**Fetch single list:**
 
 ```php
 SmsTo::getList(1);
 ```
-| Parameter        | Value           | Required  |
+| Parameter        | Default Value           | Required  |
 | ------------- |-------------| -----|
 | list id      | 1 | Yes |
 
+**Sending single SMS to a list:**
 
-### Get Balance:
+```php
+$message = 'Hello World!';
 
-To get the current balance of your [SMS.to](https://sms.to) account as well as the approximate number of messages you can send:
+SmsTo::setMessage($message)
+    ->setListId(1)
+    ->sendList();
+```
+
+### Get Balance
+
+To get the current balance of your [SMS.to](https://sms.to) account as well as the approximate number of messages:
 
 ```php
 SmsTo::getBalance();
@@ -162,7 +163,9 @@ array: [
 
 ### Handling Webhook/Callback
 
-When `Callback URL` is specified, we send Callback data to the `Callback URL`. The parameters are sent via a POST request to your `Callback URL`. SMS.to will be expecting response 200 OK in return, or it will keep retrying every 15 minutes until the Callback expires (up to 48 hours).
+If specified, we will send responses to your *callback URL* via a **POST** method. [SMS.to](https://sms.to) will be expecting response with the status code `200` (OK) in return, or it will keep retrying every 15 minutes until the callback expires (up to 48 hours). 
+
+Usage Example:
 
 ```php
 // routes/web.php
