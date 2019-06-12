@@ -14,6 +14,8 @@ This package allows you to easily intergate [SMS.to API](https://sms.to/api-docs
 
 This package requires Laravel 5.2 or higher and you need to have a working [SMS.to](https://sms.to) account with sufficient balance. 
 
+Please create account [HERE](https://sms.to/register) <a href="sms.to/register" target="_blank">HERE</a>
+
 ## Installation
 
 You can install this package into Laravel project via Composer:
