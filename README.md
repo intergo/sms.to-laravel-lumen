@@ -3,7 +3,7 @@
 </p>
 
 <h2 align="center">
-API integration for Laravel 
+SMS API integration for Laravel / Lumen ([SMS.to](https://sms.to))
 </h2>
 
 This package allows you to send SMS messages to your users in just a few steps.  
@@ -12,7 +12,7 @@ This package allows you to send SMS messages to your users in just a few steps.
 2) Create account on SMS Gateway provider [HERE](https://sms.to/register)
 
 
-[SMS.to](https://sms.to) is a bulk SMS marketing platform that offers a smarter way for businesses to communicate with customers through multiple channels. Reach customers in their preferred channel through SMS, WhatsApp or Viber Messages. For more details, please visit: https://sms.to
+[SMS.to](https://sms.to) is a bulk SMS / marketing / SMS API platform that offers a smarter way for businesses to communicate with customers through multiple channels. Reach customers in their preferred channel through SMS, WhatsApp or Viber Messages. For more details, please visit: https://sms.to
 
 ## Requirements
 
