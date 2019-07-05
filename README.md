@@ -3,7 +3,7 @@
 </p>
 
 <h2 align="center">
-SMS API integration for Laravel / Lumen ([SMS.to](https://sms.to))
+SMS API integration for Laravel / Lumen (https://sms.to)
 </h2>
 
 This package allows you to send SMS messages to your users in just a few steps.  
