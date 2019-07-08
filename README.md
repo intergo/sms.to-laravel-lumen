@@ -8,7 +8,7 @@ SMS API integration for Laravel / Lumen (https://sms.to)
 
 This package allows you to send SMS messages to your users in just a few steps.  
 
-1) Intergate [SMS.to API](https://sms.to/api-docs/) (this repo) into your Laravel and/or Lumen projects.
+1) Intergate [SMS.to API](https://sms.to/api-docs/index.html) (this repo) into your Laravel and/or Lumen projects.
 2) Create account on SMS Gateway provider [HERE](https://sms.to/register)
 
 
