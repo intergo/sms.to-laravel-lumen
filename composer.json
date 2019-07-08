@@ -1,5 +1,5 @@
 {
-    "name": "intergo/laravel-smsto",
+    "name": "intergo/sms.to-laravel-lumen",
     "description": "Laravel 5 package for sending sms in SMS.to",
     "keywords": [
         "laravel",
