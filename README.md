@@ -23,7 +23,7 @@ This package requires Laravel 5.2 or higher and you need to have a working [SMS.
 You can install this package into Laravel project via Composer:
 
 ```shell
-composer require intergo/laravel-smsto
+composer require intergo/sms.to-laravel-lumen
 ```
 
 If you are using Laravel 5.5 or above, the package will automatically register the `SmsTo` provider.
