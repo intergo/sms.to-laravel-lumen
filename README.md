@@ -117,7 +117,12 @@ With your [SMS.to](https://sms.to) account you can create and manage your lists 
 
 **Fetch paginated lists:**
 ```php
-SmsTo::getLists(['limit' => 100, 'page' => 1, 'sort' => 'created_at', 'search' => 'My List']);
+SmsTo::getLists([
+    'limit' => 100,
+    'page' => 1,
+    'sort' => 'created_at',
+    'search' => 'My List'
+]);
 ```
 The following parameters can be specified:
 
