@@ -194,7 +194,7 @@ public function callback(Request $request)
 | Parameter        | Sample           |
 | ------------- |-------------|
 | trackingId      | 185c9d63-dae2-4614-b0f4-48453e870dcf |
-| messageId      | 185c9d63-dae2-4614-b0f4-48453e870dcf      |
+| messageId      | 185c9d63-dae2-4614-b0f4-xxxxxxxxxxxx      |
 | phone | +3579958****      |
 | status | SENT |
 | parts | 1 |
@@ -205,7 +205,7 @@ public function callback(Request $request)
 Require this package with composer.
 
 ```shell
-composer require intergo/laravel-smsto
+composer require intergo/sms.to-laravel-lumen
 ```
 
 Uncomment the following lines in the bootstrap file:
