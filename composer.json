@@ -1,5 +1,5 @@
 {
-    "name": "intergo/laravel-smsto",
+    "name": "intergo/sms.to-laravel-lumen",
     "description": "Laravel 5 package for sending sms in SMS.to",
     "keywords": [
         "laravel",
@@ -10,12 +10,16 @@
     "authors": [
         {
             "name": "Manny Isles",
-            "email": "manny@intergo.com.cy"
+            "email": "manny@intergo.com.cy",
+            "homepage": "https://intergo.com.cy",
+            "role": "Developer"
         }
     ],
     "require": {
-        "php": ">=7.0.0",
+
+        "php": ">=7.3",
         "guzzlehttp/guzzle": "^7.0.1"
+        "intergo/sms.to-php": "0.0.*"
     },
     "autoload": {
         "psr-0": {

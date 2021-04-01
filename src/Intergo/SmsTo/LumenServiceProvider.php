@@ -3,9 +3,11 @@
 namespace Intergo\SmsTo;
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
+use Carbon\Carbon;
+use Storage;
 use Intergo\SmsTo\Http\Client as SmsToClient;
 
-class ServiceProvider extends BaseServiceProvider {
+class LumenServiceProvider extends BaseServiceProvider {
     
     /**
      * Bootstrap the application services.
@@ -18,15 +20,18 @@ class ServiceProvider extends BaseServiceProvider {
             __DIR__ . '/../../config/smsto.php' => config_path('smsto.php'),
         ], 'config');
 
-        $this->publishes([
-            __DIR__.'/../../views' => resource_path('views/vendor/smsto'),
-        ], 'views');
 
         $this->mergeConfigFrom(
             __DIR__ . '/../../config/smsto.php', 'smsto'
         );
 
-        $this->loadViewsFrom(__DIR__.'/../../views', 'smsto');
+        // May be we need this if lumen
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                \Intergo\SmsTo\PublishCommand::class
+            ]);
+        }
+
     }
 
     /**
