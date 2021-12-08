@@ -9,16 +9,23 @@
     ],
     "authors": [
         {
-            "name": "Manny Isles",
-            "email": "manny@intergo.com.cy",
+            "name": "Intergo Telecom",
+            "email": "italosm@intergo.com.cy",
             "homepage": "https://intergo.com.cy",
             "role": "Developer"
         }
     ],
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../sms.to-php"
+        }
+    ],
     "require": {
         "php": ">=7.1.3",
-        "guzzlehttp/guzzle": "~6.0",
-        "intergo/sms.to-php": "0.0.*"
+        "guzzlehttp/guzzle": "7.*",
+        "intergo/sms.to-php": "dev-add-sdk-for-all-endpoints",
+        "illuminate/support": "^8.75"
     },
     "autoload": {
         "psr-0": {
@@ -31,11 +38,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Intergo\\SmsTo\\ServiceProvider"
-            ],
-            "aliases": {
-                "SmsTo": "Intergo\\SmsTo\\Facades\\SmsToFacade"
-            }
+                "Intergo\\SmsTo\\SmsToServiceProvider"
+            ]
         }
     }
 }

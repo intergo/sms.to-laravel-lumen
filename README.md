@@ -32,7 +32,7 @@ If you are using Laravel 5.4 or below, add `Intergo\SmsTo\ServiceProvider::class
 ```php
 'providers' => [
     // Other service providers...
-    Intergo\SmsTo\ServiceProvider::class,
+    Intergo\SmsTo\SmsToServiceProvider::class,
 ],
 'aliases' => [
     'SmsTo' => Intergo\SmsTo\Facades\SmsToFacade::class,
@@ -229,7 +229,7 @@ Configure the service provider (and AppServiceProvider if not already enabled):
 ```php
 // bootstrap/app.php:
 $app->register(App\Providers\AppServiceProvider::class);
-$app->register(Intergo\SmsTo\LumenServiceProvider::class);
+$app->register(Intergo\SmsTo\AuthServiceProvider::class);
 ```
 
 Publish the configuration file:

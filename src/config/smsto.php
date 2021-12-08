@@ -1,13 +1,15 @@
 <?php
 
 return [
+    'auth_mode' => env('SMSTO_AUTH_MODE', 'api_key'),
     'client_id' => env('SMSTO_CLIENT_ID'),
-    'client_secret' => env('SMSTO_CLIENT_SECRET'),
-    'username'=> env('SMSTO_EMAIL'),
-    'password' => env('SMSTO_PASSWORD'),
-    'scope' => '*',
-    'sender_id' => env('SMSTO_SENDER_ID'),
-    'callback_url' => env('SMSTO_CALLBACK_URL'),
-    'environment' => env('SMSTO_ENVIRONMENT', 'sandbox'),
-    'base_url' => env('SMSTO_BASE_URL', 'https://api.sms.to/v1'),
+    'secret' => env('SMSTO_CLIENT_SECRET'),
+    'api_key'=> env('SMSTO_API_KEY'),
+
+    'auth_url' => env('SMSTO_AUTH_URL', 'https://auth.sms.to'),
+    'sms_url' => env('SMSTO_SMS_URL', 'https://api.sms.to'),
+    'contact_url' => env('SMSTO_CONTACT_URL', 'https://sms.to'),
+    'shortlink_url' => env('SMSTO_SHORTLINK_URL', 'https://sms.to'),
+    'number_lookup_url' => env('SMSTO_NUMBER_LOOKUP_URL', 'https://sms.to'),
+    'team_url' => env('SMSTO_TEAM_URL', 'https://sms.to'),
 ];
