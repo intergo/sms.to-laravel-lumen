@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a39e0099dc4e565aaeee6c2da080b6b6",
+    "content-hash": "d8562de6d67721c738bfac9e8b92d252",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -638,16 +638,16 @@
         },
         {
             "name": "intergo/sms.to-php",
-            "version": "dev-add-sdk-for-all-endpoints",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/intergo/sms.to-php.git",
-                "reference": "7bb85c4246909f5366a6f71f12da085bf73ce0ba"
+                "reference": "b165373d8b00c2226a1f23a299bfcbb08494eafd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/intergo/sms.to-php/zipball/7bb85c4246909f5366a6f71f12da085bf73ce0ba",
-                "reference": "7bb85c4246909f5366a6f71f12da085bf73ce0ba",
+                "url": "https://api.github.com/repos/intergo/sms.to-php/zipball/b165373d8b00c2226a1f23a299bfcbb08494eafd",
+                "reference": "b165373d8b00c2226a1f23a299bfcbb08494eafd",
                 "shasum": ""
             },
             "require": {
@@ -678,9 +678,9 @@
             ],
             "support": {
                 "issues": "https://github.com/intergo/sms.to-php/issues",
-                "source": "https://github.com/intergo/sms.to-php/tree/add-sdk-for-all-endpoints"
+                "source": "https://github.com/intergo/sms.to-php/tree/1.0.0"
             },
-            "time": "2021-12-09T09:23:51+00:00"
+            "time": "2021-12-09T11:47:04+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -1562,9 +1562,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "intergo/sms.to-php": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
