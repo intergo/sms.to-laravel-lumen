@@ -1,11 +1,5 @@
 <?php
 
-if (!function_exists('smsto')) {
-	function smsto()
-	{
-		return app(\Intergo\SmsTo\SmsTo::class);
-	}
-}
 
 if ( ! function_exists('config_path'))
 {
