@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Intergo\SmsTo;
 
@@ -14,8 +14,9 @@ use Intergo\SmsTo\Module\Shortlink\Shortlink;
 use Intergo\SmsTo\Module\Sms\Sms;
 use Intergo\SmsTo\Module\Team\Team;
 
-class SmsToServiceProvider extends BaseServiceProvider {
-    
+class SmsToServiceProvider extends BaseServiceProvider
+{
+
     /**
      * Bootstrap the application services.
      *
@@ -39,13 +40,17 @@ class SmsToServiceProvider extends BaseServiceProvider {
      */
     public function register()
     {
-        $this->app->bind('smsto-auth', function() {
+        $this->app->bind('smsto-auth', function () {
             $authType = config('smsto.auth_mode');
-            if($authType === 'api_key')
-            {
+            if ($authType === 'api_key') {
                 return new Credential(new ApiKeyCredential(config('smsto.api_key')));
             }
-            return new Credential(new OauthCredential(config('smsto.client_id'), config('smsto.secret')));
+            $clientID = config('smsto.client_id');
+            $secret = config('smsto.secret');
+            $expiresIn = config('smsto.token_expire_ttl');
+            $enableAutoRefreshToken = config('smsto.enable_token_auto_refresh');
+            $autoRefreshOffset = config('smsto.auto_refresh_offset');
+            return new Credential(new OauthCredential($clientID, $secret, $expiresIn, $enableAutoRefreshToken, $autoRefreshOffset));
         });
 
         $this->bindModule('smsto-sms', Sms::class, 'smsto.sms_url');
@@ -65,7 +70,7 @@ class SmsToServiceProvider extends BaseServiceProvider {
 
     private function bindModule($abstract, $class, $baseUrl)
     {
-        $this->app->bind($abstract, function() use ($class, $baseUrl) {
+        $this->app->bind($abstract, function () use ($class, $baseUrl) {
             $credentials = $this->authVerify();
             $object = new $class($credentials);
             $object->setBaseUrl(config($baseUrl));

@@ -642,12 +642,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/intergo/sms.to-php.git",
-                "reference": "c93dff657df30d1362329bb54fdae5b677959a32"
+                "reference": "7bb85c4246909f5366a6f71f12da085bf73ce0ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/intergo/sms.to-php/zipball/c93dff657df30d1362329bb54fdae5b677959a32",
-                "reference": "c93dff657df30d1362329bb54fdae5b677959a32",
+                "url": "https://api.github.com/repos/intergo/sms.to-php/zipball/7bb85c4246909f5366a6f71f12da085bf73ce0ba",
+                "reference": "7bb85c4246909f5366a6f71f12da085bf73ce0ba",
                 "shasum": ""
             },
             "require": {
@@ -680,7 +680,7 @@
                 "issues": "https://github.com/intergo/sms.to-php/issues",
                 "source": "https://github.com/intergo/sms.to-php/tree/add-sdk-for-all-endpoints"
             },
-            "time": "2021-12-08T07:18:09+00:00"
+            "time": "2021-12-09T09:23:51+00:00"
         },
         {
             "name": "nesbot/carbon",
