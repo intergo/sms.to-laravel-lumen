@@ -18,7 +18,7 @@
     "require": {
         "php": ">=7.1.3",
         "guzzlehttp/guzzle": "7.*",
-        "intergo/sms.to-php": "1.0.*",
+        "intergo/sms.to-php": "dev-phone-status",
         "illuminate/support": "^8.75"
     },
     "autoload": {
