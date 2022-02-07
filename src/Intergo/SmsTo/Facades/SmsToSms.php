@@ -17,6 +17,7 @@ use Intergo\SmsTo\Module\Sms\Message\IMessage;
  * @method static array getLastMessage()
  * @method static array getMessageByID(string $id)
  * @method static array setType(string $type)
+ * @method static array isOptedOut(string $phone, string $defaultPrefix = null)
  */
 class SmsToSms extends Facade
 {
